@@ -4,7 +4,7 @@ describe('validateValue', () => {
   test('валидное значение', () => {
     expect(mapArrToString([1, 2, 3])).toEqual(['1', '2', '3']);
   });
-  test('не валидное значение', () => {
+  test('смешанное значение', () => {
     expect(mapArrToString([1, 2, 3, null, undefined, 'hello'])).toEqual(['1', '2', '3']);
   });
   test('пустой массив', () => {
