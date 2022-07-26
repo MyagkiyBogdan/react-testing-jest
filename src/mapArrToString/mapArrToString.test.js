@@ -1,4 +1,4 @@
-import { mapArrToString } from './mapArrToStrin';
+import { mapArrToString } from './mapArrToString';
 // toEqual - глубокое сравнение
 describe('validateValue', () => {
   test('валидное значение', () => {
