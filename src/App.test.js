@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 
 describe('App', () => {
@@ -30,5 +30,26 @@ describe('App', () => {
     const asyncData = await screen.findByText(/jhon/i);
     expect(asyncData).toBeInTheDocument();
     expect(asyncData).toHaveStyle({ color: 'red' });
+  });
+
+  test('click event', () => {
+    render(<App />);
+    const btn = screen.getByTestId('toggle-btn');
+    expect(screen.queryByTestId('toggle-elem')).toBeNull();
+    fireEvent.click(btn);
+    expect(screen.queryByTestId('toggle-elem')).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(screen.queryByTestId('toggle-elem')).toBeNull();
+  });
+
+  test('input event', () => {
+    render(<App />);
+    const input = screen.getByPlaceholderText(/name/i);
+    expect(screen.getByTestId('value-elem')).toContainHTML('');
+    // fireEvent - Искуственное событые, есть еще userEvent
+    fireEvent.input(input, {
+      target: { value: 'Hello Test' },
+    });
+    expect(screen.getByTestId('value-elem')).toContainHTML('Hello Test');
   });
 });
